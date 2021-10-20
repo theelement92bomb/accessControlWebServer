@@ -1,59 +1,61 @@
 <template>
-  <nav class="side-nav">
-    <ul class="menu">
-      <li><router-link class="event-link" to="/">Homepage</router-link></li>
-      <li>
-        <router-link class="event-link" to="/advSearch"
-          >Advanced Search</router-link
-        >
-      </li>
-      <li>
-        <router-link class="event-link" to="/newTrade">New Trade</router-link>
-      </li>
-      <li>
-        <router-link class="event-link" to="/tradeCorrections"
-          >Trade Corrections</router-link
-        >
-      </li>
-      <li>
-        <router-link class="event-link" to="/foreignTradeCorrections"
-          >Foreign Trade Corrections</router-link
-        >
-      </li>
-      <li>
-        <router-link class="event-link" to="/NYSEsales"
-          >NYSE Short Sales</router-link
-        >
-      </li>
-      <li>
-        <router-link class="event-link" to="/foreignTradeNew"
-          >New Foreign Trade</router-link
-        >
-      </li>
-      <li>
-        <router-link class="event-link" to="/status"
-          >Activity Status</router-link
-        >
-      </li>
-      <li>
-        <router-link class="event-link" to="/userActivity"
-          >Users' Activity</router-link
-        >
-      </li>
-      <li>
-        <router-link class="event-link" to="/unsettledTrades"
-          >Unsettled Trades</router-link
-        >
-      </li>
-      <li>
-        <router-link class="event-link" to="/accessControl"
-          >Access Control</router-link
-        >
-      </li>
-    </ul>
-  </nav>
-  <div class="container">
-    <router-view />
+  <div>
+    <nav class="side-nav">
+      <ul class="menu">
+        <li><router-link class="event-link" to="/">Homepage</router-link></li>
+        <li>
+          <router-link class="event-link" to="/advSearch"
+            >Advanced Search</router-link
+          >
+        </li>
+        <li>
+          <router-link class="event-link" to="/newTrade">New Trade</router-link>
+        </li>
+        <li>
+          <router-link class="event-link" to="/tradeCorrections"
+            >Trade Corrections</router-link
+          >
+        </li>
+        <li>
+          <router-link class="event-link" to="/foreignTradeCorrections"
+            >Foreign Trade Corrections</router-link
+          >
+        </li>
+        <li>
+          <router-link class="event-link" to="/NYSEsales"
+            >NYSE Short Sales</router-link
+          >
+        </li>
+        <li>
+          <router-link class="event-link" to="/foreignTradeNew"
+            >New Foreign Trade</router-link
+          >
+        </li>
+        <li>
+          <router-link class="event-link" to="/status"
+            >Activity Status</router-link
+          >
+        </li>
+        <li>
+          <router-link class="event-link" to="/userActivity"
+            >Users' Activity</router-link
+          >
+        </li>
+        <li>
+          <router-link class="event-link" to="/unsettledTrades"
+            >Unsettled Trades</router-link
+          >
+        </li>
+        <li>
+          <router-link class="event-link" to="/accessControl"
+            >Access Control</router-link
+          >
+        </li>
+      </ul> 
+    </nav>
+    <div class="container">
+      <router-view />
+    </div>
   </div>
 </template>
 

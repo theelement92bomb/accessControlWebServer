@@ -26,7 +26,7 @@
                 <label for="userId">User Id</label>
               </td>
               <td>
-                <input id="userId" type="text" v-model="fieldUserId"  />
+                <input id="userId" type="text" v-model="currentUser.UserId"  />
               </td>
             </tr>
             <tr>
@@ -34,7 +34,7 @@
                 <label for="lastName">Last Name</label>
               </td>
               <td>
-                <input id="lastName" type="text" v-model="fieldLastName" />
+                <input id="lastName" type="text" v-model="currentUser.LastName" />
               </td>
             </tr>
             <tr>
@@ -45,37 +45,35 @@
                 <input
                   id="firstName"
                   type="text"
-                  v-model="fieldFirstName"
+                  v-model="currentUser.FirstName"
                 />
               </td>
             </tr>
             <tr>
               <td>
-                <label for="branch">Branch</label>
+                <label for="department">Department</label>
               </td>
               <td>
-                <input id="branch" type="text" v-model="fieldBranch" />
+                <input id="department" type="text" v-model="currentUser.Department" />
               </td>
             </tr>
           </table>
         </div>
         <div class="col-lg-8">
-          <table>
-            <tr>
-              <h3>TCS Users</h3>
-              <button @click="search">Refresh</button>
-            </tr>
+          <h3>TCS Users</h3>
+          <button @click="search">Refresh</button>
+          <table border="1" class="dataTable">
             <tr>
               <th>User Id</th>
               <th>Last Name</th>
               <th>First Name</th>
-              <th>Branch Code</th>
+              <th>Department</th>
             </tr>
-            <tr v-for="(user, userNum) in users" :key="userNum">
-              <td>{{users.UserId}}</td>
-              <td>{{users.LastName}}</td>
-              <td>{{users.FirstName}}</td>
-              <td>{{users.Department}}</td>
+            <tr v-for="user in users" :key="user.userId">
+              <td>{{user.userId}}</td>
+              <td>{{user.lastName}}</td>
+              <td>{{user.firstName}}</td>
+              <td>{{user.department}}</td>
             </tr>
           </table>
         </div>
@@ -90,14 +88,7 @@ import axios from "axios";
 export default {
   data() {
     return {
-      userId: "",
-      lastName: "",
-      firstName: "",
-      branch: "",
-      fieldUserId: "",
-      fieldLastName: "",
-      fieldFirstName: "",
-      fieldBranch: "",
+      currentUser: {},
       users: [],
     };
   },
@@ -105,10 +96,9 @@ export default {
     search() {
       axios
         .get(
-          "http://localhost:44325/UserAccess/Users"
+          "UserAccess/Users"
         )
         .then((res) => {
-          console.log(JSON.stringify(res.data));
           this.users = res.data;
         })
         .catch((error) => {
@@ -119,8 +109,21 @@ export default {
       return;
     },
     addNew() {
-      return;
+      // alert(`Add New User ${JSON.stringify(this.currentUser)}`);
+      axios
+        .post(
+          "UserAccess/AddUser", this.currentUser
+        )
+        .catch((error) => {
+          console.error(error);
+        });
     },
   },
 };
 </script>
+
+<style scoped>
+.dataTable{
+  width: 600px;
+}
+</style>

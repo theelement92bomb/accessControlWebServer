@@ -64,3 +64,4 @@ C:\dev\accessControlWebServer\bin\Debug\netcoreapp3.1\runtimes\win-x86\native\Mi
 C:\dev\accessControlWebServer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
 C:\dev\accessControlWebServer\bin\Debug\netcoreapp3.1\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
 C:\dev\accessControlWebServer\obj\Debug\netcoreapp3.1\accessControlWebServer.csprojAssemblyReference.cache
+C:\dev\accessControlWebServer\bin\Debug\netcoreapp3.1\package-lock.json
