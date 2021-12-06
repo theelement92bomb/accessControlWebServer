@@ -11,11 +11,14 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <button @click="addNew()">New</button>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
           <button @click="update()">Update</button>
+        </div>
+        <div class="col-lg-4">
+          <button @click="deleteUser()">Delete</button>
         </div>
       </div>
       <div class="row">
@@ -26,7 +29,7 @@
                 <label for="userId">User Id</label>
               </td>
               <td>
-                <input id="userId" type="text" v-model="currentUser.UserId"  />
+                <input id="userId" type="text" v-model="currentUserId"  />
               </td>
             </tr>
             <tr>
@@ -34,7 +37,7 @@
                 <label for="lastName">Last Name</label>
               </td>
               <td>
-                <input id="lastName" type="text" v-model="currentUser.LastName" />
+                <input id="lastName" type="text" v-model="currentLastName" />
               </td>
             </tr>
             <tr>
@@ -45,7 +48,7 @@
                 <input
                   id="firstName"
                   type="text"
-                  v-model="currentUser.FirstName"
+                  v-model="currentFirstName"
                 />
               </td>
             </tr>
@@ -54,7 +57,7 @@
                 <label for="department">Department</label>
               </td>
               <td>
-                <input id="department" type="text" v-model="currentUser.Department" />
+                <input id="department" type="text" v-model="currentDepartment" />
               </td>
             </tr>
           </table>
@@ -70,10 +73,10 @@
               <th>Department</th>
             </tr>
             <tr v-for="user in users" :key="user.userId">
-              <td>{{user.userId}}</td>
-              <td>{{user.lastName}}</td>
-              <td>{{user.firstName}}</td>
-              <td>{{user.department}}</td>
+              <td @click="displayUser(user.userId)">{{user.userId}}</td>
+              <td @click="displayUser(user.userId)">{{user.lastName}}</td>
+              <td @click="displayUser(user.userId)">{{user.firstName}}</td>
+              <td @click="displayUser(user.userId)">{{user.department}}</td>
             </tr>
           </table>
         </div>
@@ -88,9 +91,15 @@ import axios from "axios";
 export default {
   data() {
     return {
-      currentUser: {},
+      currentUserId: '',
+      currentLastName: '',
+      currentFirstName: '',
+      currentDepartment: '',
       users: [],
     };
+  },
+  created(){
+    this.search()
   },
   methods: {
     search() {
@@ -105,14 +114,50 @@ export default {
           console.error(error);
         });
     },
-    update() {
-      return;
-    },
     addNew() {
-      // alert(`Add New User ${JSON.stringify(this.currentUser)}`);
       axios
         .post(
-          "UserAccess/AddUser", this.currentUser
+          "UserAccess/AddUser", {
+            UserId: this.currentUserId,
+            LastName: this.currentLastName,
+            FirstName: this.currentFirstName,
+            Department: this.currentDepartment
+          }
+        )
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    displayUser(ID){
+      let user = {};
+      for (var i = 0; i < this.users.length; i++){
+        var item = this.users[i];
+        if (item.userId === ID){
+          user = item;
+          break;
+        }
+      }
+      this.currentUserId = user.userId;
+      this.currentLastName = user.lastName;
+      this.currentFirstName = user.firstName;
+      this.currentDepartment = user.department;
+      
+    },
+    deleteUser(){
+      axios
+        .delete("UserAccess/DeleteUser/" + this.currentUserId)
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+    update() {
+      axios
+        .post("UserAccess/UpdateUser/" + this.currentUserId, {
+            UserId: this.currentUserId,
+            LastName: this.currentLastName,
+            FirstName: this.currentFirstName,
+            Department: this.currentDepartment
+          }
         )
         .catch((error) => {
           console.error(error);
